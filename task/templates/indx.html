@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Configuration</title>
+  </head>
+  <body>
+      <center><h1>Details</h1></center>
+      <form method="post" action="/data/send">
+        {% csrf_token %}
+      <div class="d-flex justify-content-center">
+        <div class="shadow p-3 mb-5 bg-white rounded" style="width: 500px; ">
+  
+          <div class="form-group" style="font-size:20px;">
+            <label for="inputAddress">Number of Cameras</label>
+            <input type="text" class="form-control" id="nodevice" name="devices" placeholder="Enter No of Camera device">
+          </div>
+          <center><input class="btn btn-primary" onclick="addCameras()" value="ADD"></center>
+          
+  
+        </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="shadow p-3 mb-5 bg-white rounded" id="cam" style="width: 500px; ">
+                
+              
+              
+      </div>
+            </div>
+            <button type="submit"  class="btn btn-success">Submit</button>
+        </form>
+            <script>
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/python/'
+
+            // + personName
+            // + '/'
+        );
+
+                function sendmsg(){
+                  chatSocket.send(JSON.stringify({
+                    
+            }))
+                }
+                // function clear(aa){
+                //     document.getElementById(aa).innerHTML = ' '
+                // }
+                function addCameras(){
+                    document.getElementById('cam').innerHTML = " "
+                var i = document.getElementById('nodevice').value
+                for(j=1;j<=i;j++){
+                    document.getElementById('cam').innerHTML += `<div><div class="form-group" style="font-size:20px;">
+                    <label for="inputAddress">Camera ${j}</label><input type="text" class="form-control"  name="cameraip${j}" placeholder="Enter IP of ${j} Camera device">
+                    <input type="text" class="form-control" name="cameraframe${j}" placeholder="Enter Frame Rate of ${j} Camera device">
+          </div></div>`
+                }
+                }
+            </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
