@@ -18,7 +18,7 @@ def accept(req):
         print(camera)
 
         ws = websocket.WebSocket()
-        ws.connect("ws://localhost:8000/ws/chat/python/")
+        ws.connect("ws://172.31.84.9:8000/ws/chat/python/")
         print("Sending")
         result = json.dumps(camera) 
   
