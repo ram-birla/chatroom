@@ -12,13 +12,20 @@ def accept(req):
         print(number)
         camera = {}
         for i in range(1,number+1):
+            c = []
             cameraip = req.POST['cameraip'+str(i)] 
-            print(cameraip)
-            camera['cameraip'+str(i)] = cameraip
+            cameraframe = req.POST['cameraframe'+str(i)]
+            print(cameraip,cameraframe)
+            # c['cameraip'+str(i)] = cameraip
+            # c['cameraframe'+str(i)] = cameraframe
+            c.append(cameraip)
+            c.append(cameraframe)
+            camera['cam'+str(i)] = c
         print(camera)
+        
 
         ws = websocket.WebSocket()
-        ws.connect("ws://52.90.40.194:8001/ws/chat/python/")
+        ws.connect("ws://52.90.40.194/ws/chat/python/")
         print("Sending")
         result = json.dumps(camera) 
   
